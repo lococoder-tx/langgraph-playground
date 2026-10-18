@@ -9,7 +9,6 @@ TRANSPORT_TYPES = get_args(Transport)
 
 
 def _parse_transport(value: str) -> Transport:
-    print(TRANSPORT_TYPES)
     if value not in TRANSPORT_TYPES:
         raise ValueError(
             f"Unsupported MCP_TRANSPORT {value!r}; expected one of {TRANSPORT_TYPES}"
