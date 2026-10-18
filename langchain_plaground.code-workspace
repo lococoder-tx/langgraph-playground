@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "path": "01-example-mcp-server",
+    },
+    {
+      "path": "02-hitl-example",
+    },
+    {
+      "path": "03-langgraph-store",
+    },
+  ],
+  "settings": {
+    "chat.tools.terminal.autoApprove": {
+      "git -C 03-langgraph-store": true,
+    },
+  },
+}

@@ -1,0 +1,21 @@
+[project]
+name = "langgraph-store-example"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "elijahgaytan@lococoder.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "langchain-openai>=1.7.2",
+    "langgraph>=1.2.16",
+    "python-dotenv>=1.2.4",
+]
+
+[project.scripts]
+langgraph-store-example = "langgraph_store_example:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

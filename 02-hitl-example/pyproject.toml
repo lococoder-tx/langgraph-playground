@@ -1,0 +1,35 @@
+[project]
+name = "hitl-example"
+version = "0.1.0"
+description = "A LangChain agent that uses tools from an MCP server"
+authors = [
+    { email = "elijahgaytan@lococoder.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "langchain[mcp]>=1.4.6",
+    "langchain-openai>=1.7.2",
+    "langgraph>=1.2.16",
+    "python-dotenv>=1.2.4",
+    "fastapi>=0.143.3",
+    "uvicorn>=0.54.0",
+    "jsonschema>=4.26.0",
+    "streamlit>=1.66.0",
+    "httpx>=0.28.1",
+]
+
+[project.scripts]
+hitl-example = "hitl_example.agent:main"
+hitl-server = "hitl_example.api:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = ["ignore::langchain_core._api.LangChainBetaWarning"]

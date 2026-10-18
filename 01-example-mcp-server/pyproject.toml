@@ -1,0 +1,19 @@
+[project]
+name = "example-mcp-server"
+version = "0.1.0"
+description = "A simple test MCP server built with FastMCP"
+requires-python = ">=3.14"
+dependencies = [
+    "fastmcp",
+    "python-dotenv>=1.2.4",
+]
+
+[project.scripts]
+example-mcp-server = "example_mcp_server.server:main"
+
+[dependency-groups]
+dev = ["pytest"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
