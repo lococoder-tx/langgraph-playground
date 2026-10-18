@@ -14,6 +14,24 @@ ss = st.session_state
 ss.setdefault("thread_id", None)
 # Turns: {"role": "user", "text": ...} or {"role": "assistant", "items": [...]}
 ss.setdefault("history", [])
+# The pending "interrupt" event (see api/schemas.py PendingInterrupt), or None:
+# {
+#   "type": "interrupt",
+#   "id": "<interrupt id, echoed back on resume>",
+#   "value": {
+#     "type": "mcp_elicitation",
+#     "tool_name": "order_coffee",
+#     "requests": [
+#       # mode "form": render requested_schema (a JSON Schema object) as inputs
+#       {"key": "coffee_order", "mode": "form", "message": "What would you like?",
+#        "requested_schema": {"type": "object", "required": ["drink"], "properties": {
+#            "drink": {"type": "string", "title": "Drink", "enum": ["latte", "mocha"]},
+#            "shots": {"type": "integer", "default": 1, "description": "..."}}}},
+#       # mode "url": the user completes the step at an external link
+#       {"key": "payment", "mode": "url", "message": "Pay here", "url": "https://..."},
+#     ],
+#   },
+# }
 ss.setdefault("interrupt", None)
 
 with st.sidebar:
@@ -167,6 +185,9 @@ def interrupt_form(interrupt: dict):
     action = "accept" if accept else "decline" if decline else "cancel" if cancel else None
     if action is None:
         return
+    # One answer per request key (see api/schemas.py Resume), e.g.
+    # {"coffee_order": {"action": "accept", "content": {"drink": "latte"}},
+    #  "payment": {"action": "accept"}}
     responses = {}
     for req in value["requests"]:
         answer = {"action": action}
